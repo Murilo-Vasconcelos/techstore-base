@@ -649,6 +649,11 @@ h2 {
   font-weight: 600;
 }
 
+.item-titulo a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .item-preco {
   font-size: 0.9rem;
   color: var(--cor-texto-suave);
@@ -785,6 +790,40 @@ h2 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Frete grátis no resumo do carrinho */
+
+.frete {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-1);
+  padding: var(--espaco-3);
+  background: var(--cor-moldura);
+  border-radius: var(--raio-pequeno);
+  font-size: 0.9rem;
+}
+
+.frete p {
+  margin: 0;
+}
+
+.frete-ok {
+  background: var(--cor-frete-fundo);
+  color: var(--cor-frete);
+}
+
+.frete-destaque {
+  font-weight: 700;
+}
+
+.frete-regra {
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+}
+
+.frete-ok .frete-regra {
+  color: var(--cor-frete);
 }
 
 /* Estoque */
@@ -937,4 +976,63 @@ h2 {
     grid-column: 2 / -1;
     justify-self: start;
   }
+}
+
+/* Aviso de produto esgotado (página do produto) */
+
+.aviso-esgotado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-2);
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+
+.aviso-esgotado-titulo {
+  margin: 0;
+  font-weight: 800;
+}
+
+.aviso-esgotado-texto {
+  margin: 0 0 var(--espaco-2);
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+.aviso-esgotado input {
+  padding: var(--espaco-3);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  background: var(--cor-fundo);
+}
+
+.aviso-esgotado .botao {
+  margin-top: var(--espaco-2);
+}
+
+.mensagem-erro,
+.mensagem-sucesso {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.mensagem-erro {
+  color: var(--cor-erro);
+}
+
+.mensagem-sucesso {
+  color: var(--cor-frete);
+}
+
+/* Estoque: quem espera cada produto */
+
+.lista-espera {
+  list-style: none;
+  margin: var(--espaco-1) 0 0;
+  padding: 0;
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
 }

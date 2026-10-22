@@ -1,6 +1,9 @@
 import { Link, NavLink } from 'react-router'
 
-export default function Header({ clienteAtual }) {
+export default function Header({ carrinho, clienteAtual }) {
+  // O carrinho guarda uma entrada por unidade, então o tamanho do array é o total de itens
+  const quantidade = carrinho.length
+
   return (
     <header className="header">
       <p className="faixa-aviso">Troca grátis em até 30 dias · Parcele em até 10x sem juros</p>
@@ -32,7 +35,13 @@ export default function Header({ clienteAtual }) {
               <circle cx="10" cy="20.5" r="1.2" />
               <circle cx="17" cy="20.5" r="1.2" />
             </svg>
-            <span className="mini-carrinho-texto">Carrinho</span>
+            <span className="mini-carrinho-texto">
+              Carrinho
+              {/* aria-live: leitores de tela avisam a cada item adicionado */}
+              <small aria-live="polite">
+                {quantidade === 0 ? 'vazio' : `${quantidade} ${quantidade === 1 ? 'item' : 'itens'}`}
+              </small>
+            </span>
           </Link>
         </div>
       </div>

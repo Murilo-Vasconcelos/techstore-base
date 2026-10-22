@@ -1,8 +1,11 @@
 import { Link } from 'react-router'
-import { formatarPreco } from '../utils/formatarPreco'
+import { formatarPreco, formatarPrecoProduto } from '../utils/formatarPreco'
+import { estaEsgotado, podeSerVendido } from '../utils/produtos'
 
+// Card de produto usado em todos os lugares da loja: lista, "Produtos relacionados"
+// e "Você também pode gostar". Qualquer mudança no visual do produto é feita só aqui.
 export default function ProdutoCard({ produto, onAdicionar }) {
-  const esgotado = produto.estoque === 0
+  const esgotado = estaEsgotado(produto)
 
   return (
     <article className="card">
@@ -21,15 +24,18 @@ export default function ProdutoCard({ produto, onAdicionar }) {
         {produto.precoOriginal && (
           <span className="preco-original">{formatarPreco(produto.precoOriginal)}</span>
         )}
-        <span className="preco">{formatarPreco(produto.price)}</span>
+        <span className="preco">{formatarPrecoProduto(produto)}</span>
       </div>
 
       <div className="card-selos">
-        {produto.price > 100 && <span className="selo selo-frete">Frete grátis</span>}
         {esgotado && <span className="selo selo-esgotado">Esgotado</span>}
       </div>
 
-      <button className="botao" onClick={() => onAdicionar(produto)} disabled={esgotado}>
+      <button
+        className="botao"
+        onClick={() => onAdicionar(produto)}
+        disabled={!podeSerVendido(produto)}
+      >
         Adicionar ao carrinho
       </button>
     </article>

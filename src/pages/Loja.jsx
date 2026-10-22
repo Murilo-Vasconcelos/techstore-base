@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ProdutoCard from '../components/ProdutoCard'
+import { estaEsgotado } from '../utils/produtos'
 
 const CATEGORIAS = [
   { id: 'todas', nome: 'Todas' },
@@ -11,15 +12,11 @@ const CATEGORIAS = [
 
 export default function Loja({ produtos, onAdicionar }) {
   const [categoria, setCategoria] = useState('todas')
-  const [produtosVisiveis, setProdutosVisiveis] = useState(produtos)
 
-  useEffect(() => {
-    if (categoria === 'todas') {
-      setProdutosVisiveis(produtos)
-    } else {
-      setProdutosVisiveis(produtos.filter((produto) => produto.category === categoria))
-    }
-  }, [categoria, produtos])
+  // Produto esgotado não aparece na loja (a página dele continua acessível por link)
+  const naLoja = produtos.filter((produto) => !estaEsgotado(produto))
+  const produtosVisiveis =
+    categoria === 'todas' ? naLoja : naLoja.filter((produto) => produto.category === categoria)
 
   return (
     <section>
